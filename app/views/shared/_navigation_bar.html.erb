@@ -12,10 +12,13 @@
         <ul class="dropdown-menu">
         	<% current_user.teams.each do |t| %>
         	<li>
-        		<%= link_to '#' do %>
+        		<%= link_to team_switch_path(t), method: :post do %>
         			<%= t.name %>
         		<% end %>
         	</li>
+        	<% end %>
+        	<% if current_user.team %>
+        	<li role="separator" class="divider"></li>
         	<% end %>
           <li>
           	<%= link_to "New Team", new_team_path %>

@@ -1,6 +1,12 @@
 class TeamsController < ApplicationController
 	before_action :authenticate_user!
 
+	def switch
+		team = Team.find(params[:id])
+		current_user.update team: team
+		redirect_to root_path
+	end
+
   def new
   	@team = Team.new
   end
