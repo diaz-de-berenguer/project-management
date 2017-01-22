@@ -11,10 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170122063211) do
+ActiveRecord::Schema.define(version: 20170122071028) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "projects", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "team_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "projects", ["team_id"], name: "index_projects_on_team_id", using: :btree
 
   create_table "team_memberships", force: :cascade do |t|
     t.integer  "user_id"
@@ -57,6 +67,7 @@ ActiveRecord::Schema.define(version: 20170122063211) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["team_id"], name: "index_users_on_team_id", using: :btree
 
+  add_foreign_key "projects", "teams"
   add_foreign_key "team_memberships", "teams", on_delete: :cascade
   add_foreign_key "team_memberships", "users", on_delete: :cascade
   add_foreign_key "users", "teams", on_delete: :cascade
