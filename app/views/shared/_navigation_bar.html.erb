@@ -1,0 +1,8 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid" style="padding: 0 5em">
+  	<% if current_user %>
+  	<%= link_to 'Sign Out', destroy_user_session_path, method: :delete,
+  	    class: "navbar-text navbar-right navbar-link" %>
+  	<% end %>
+  </div>
+</nav>
