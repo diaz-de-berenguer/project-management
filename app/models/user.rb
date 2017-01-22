@@ -6,4 +6,6 @@ class User < ActiveRecord::Base
 
 	has_many :team_memberships, dependent: :destroy
 	has_many :teams, through: :team_memberships
+
+	belongs_to :team # Sets the 'active' team for the user
 end

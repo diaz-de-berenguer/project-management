@@ -1,20 +1,29 @@
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid" style="padding: 0 5em">
+  	<% if current_user %>
   	<!-- Team -->
     <ul class="nav navbar-nav">
       <li class="dropdown">
         <%= link_to '#', class: "dropdown-toggle", data: { toggle: 'dropdown' }, role: 'button',
             aria: { haspopup: "true", expanded: 'false' } do %>
-      		Team <span class="caret"></span>
+          <%= current_user.team.nil? ? "Team" : current_user.team.name %>
+      		<span class="caret"></span>
         <% end %>
         <ul class="dropdown-menu">
+        	<% current_user.teams.each do |t| %>
+        	<li>
+        		<%= link_to '#' do %>
+        			<%= t.name %>
+        		<% end %>
+        	</li>
+        	<% end %>
           <li>
           	<%= link_to "New Team", new_team_path %>
           </li>
         </ul>
       </li>
     </ul>
-
+    <% end %>
 
   	<% if current_user %>
   	<%= link_to 'Sign Out', destroy_user_session_path, method: :delete,

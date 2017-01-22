@@ -7,9 +7,13 @@ class TeamsController < ApplicationController
 
   def create
   	@team = Team.new(team_params)
+  	# 1) Save the Team in DB
   	if @team.save
   		membership = @team.team_memberships.build(user: current_user)
+  		# 2) Save a membership to connect user and team
   		if membership.save
+  			# 3) Set the team as the active team for the user
+  			current_user.update team: @team
 	  		flash[:notice] = "Team created succesfully"
 	  		redirect_to root_path
 	  	else
