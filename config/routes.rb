@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   root 'start#home'
 
   devise_for :users, controllers: {
@@ -8,6 +9,8 @@ Rails.application.routes.draw do
     sessions:           'users/sessions',
     unlocks:            'users/unlocks'
   }
+
+  resources :teams, only: [:new, :create, :destroy]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
