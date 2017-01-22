@@ -1,2 +1,11 @@
-<h1>Teams#new</h1>
-<p>Find me in app/views/teams/new.html.erb</p>
+<div class="container-fluid">
+	<div class="col-md-offset-2 col-md-8">
+		<h2>New Team</h2>
+		<%= simple_form_for @team do |f| %>
+			<%= f.input :name %>
+			<%= button_tag type: 'submit', class: 'btn btn-default' do %>
+				Create
+			<% end %>
+		<% end %>
+	</div>
+</div>
