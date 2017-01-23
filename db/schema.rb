@@ -19,8 +19,9 @@ ActiveRecord::Schema.define(version: 20170123165637) do
   create_table "beta_user_invites", force: :cascade do |t|
     t.string   "email"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.boolean  "redeemed",   default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   add_index "beta_user_invites", ["email"], name: "index_beta_user_invites_on_email", using: :btree
@@ -63,23 +64,18 @@ ActiveRecord::Schema.define(version: 20170123165637) do
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
-    t.string   "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
-    t.string   "unconfirmed_email"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.integer  "team_id"
   end
 
-  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["team_id"], name: "index_users_on_team_id", using: :btree
 
   add_foreign_key "beta_user_invites", "users"
   add_foreign_key "projects", "teams"
-  add_foreign_key "team_memberships", "teams", on_delete: :cascade
-  add_foreign_key "team_memberships", "users", on_delete: :cascade
-  add_foreign_key "users", "teams", on_delete: :cascade
+  add_foreign_key "team_memberships", "teams"
+  add_foreign_key "team_memberships", "users"
+  add_foreign_key "users", "teams"
 end

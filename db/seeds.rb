@@ -5,3 +5,5 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+allowed_emails = BetaUserInvite.create([{ email: 'user@example.com' }, { email: 'diego@example.com' }])
