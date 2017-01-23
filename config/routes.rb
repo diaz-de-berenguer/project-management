@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   }
 
   resources :teams, only: [:new, :create, :destroy] do
-    resources :memberships, only: [:index, :new, :create, :delete]
+    resources :memberships, only: [:index, :new, :create, :destroy]
   end
   post "/teams/switch/:id" => 'teams#switch', as: 'team_switch'
 

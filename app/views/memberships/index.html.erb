@@ -1,0 +1,22 @@
+<div class="cotainer-fluid">
+	<div class="col-md-offset-2 col-md-8">
+		<h2><%= @team.name %> team members:</h2>
+		<hr>
+		<%= link_to new_team_membership_path do %>
+			<span class="glyphicon glyphicon-plus"></span>
+			Add Member
+		<% end %>
+		<ul style="margin-top:2em">
+			<% @memberships.each do |m| %>
+				<li>
+					<%= m.user.email %>
+					<%= link_to team_membership_path(id: m.id), class: 'pull-right', method: :delete,
+					    data: { confirm: "Remove #{m.user.email} from team?" } do %>
+						<small><span class="glyphicon glyphicon-remove"></span> Remove</small>
+					<% end %>
+					<hr>
+				</li>
+			<% end %>
+		</ul>
+	</div>
+</div>

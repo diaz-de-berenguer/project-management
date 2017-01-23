@@ -11,19 +11,29 @@ class MembershipsController < ApplicationController
 	end
 
 	def create
-		email = params.require(:membership).permit(:email)
-		user  = User.find_by email: email
+		email = params.require(:membership).permit(:email)[:email]
+		user  = User.find_by(email: email)
 		if user.nil?
 			flash.now[:notice] = "#{email} not found."
 			render :new
 		else
 			membership = @team.memberships.build user: user
 			if membership.save
-				redirect_to :index
+				redirect_to team_memberships_path
 			else
 				flash.now[:notice] = "Something went wrong. #{error_messages membership}"
 				render :new
 			end
+		end
+	end
+
+	def destroy
+		@membership = TeamMembership.find params[:id]
+		if @membership.destroy
+			redirect_to team_memberships_path
+		else
+			flash.now[:notice] = "Something went wrong."
+			redirect_to team_memberships_path
 		end
 	end
 

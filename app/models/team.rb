@@ -9,4 +9,8 @@ class Team < ActiveRecord::Base
 	def remove_user_team
 		# set user.team to either nil or some other team_membership
 	end
+
+	def memberships
+		team_memberships
+	end
 end

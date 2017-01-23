@@ -1,0 +1,22 @@
+<div class="cotainer-fluid">
+	<div class="col-md-offset-2 col-md-8">
+		<h2><%= @team.name %> new team member</h2>
+		<hr>
+
+		<div class="row">
+			<div class="col-md-12">
+				<%= link_to team_memberships_path, class: 'pull-right' do %>
+					<span class="glyphicon glyphicon-chevron-left"></span>
+					Cancel
+				<% end %>
+			</div>
+		</div>
+
+		<%= simple_form_for :membership, url: team_memberships_path do |f| %>
+			<%= f.input :email %>
+			<%= button_tag type: 'submit', class: 'btn btn-default' do %>
+				Add to team
+			<% end %>
+		<% end %>
+	</div>
+</div>

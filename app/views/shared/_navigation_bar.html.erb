@@ -1,32 +1,49 @@
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid" style="padding: 0 5em">
   	<% if current_user %>
-  	<!-- Team -->
-    <ul class="nav navbar-nav">
-      <li class="dropdown">
-        <%= link_to '#', class: "dropdown-toggle", data: { toggle: 'dropdown' }, role: 'button',
-            aria: { haspopup: "true", expanded: 'false' } do %>
-          <%= current_user.team.nil? ? "Team" : current_user.team.name %>
-      		<span class="caret"></span>
-        <% end %>
-        <ul class="dropdown-menu">
-        	<% current_user.teams.each do |t| %>
-        	<li>
-        		<%= link_to team_switch_path(t), method: :post do %>
-        			<%= t.name %>
-        		<% end %>
-        	</li>
-        	<% end %>
-        	<% if current_user.team %>
-        	<li role="separator" class="divider"></li>
-        	<% end %>
+    	<!-- Team -->
+      <ul class="nav navbar-nav">
+        <li>
+          <%= link_to root_path do %>
+            <span class="glyphicon glyphicon-home"></span>
+          <% end %>
+        </li>
+        <li class="dropdown">
+          <%= link_to '#', class: "dropdown-toggle", data: { toggle: 'dropdown' }, role: 'button',
+              aria: { haspopup: "true", expanded: 'false' } do %>
+            <%= current_user.team.nil? ? "Team" : current_user.team.name %>
+        		<span class="caret"></span>
+          <% end %>
+          <ul class="dropdown-menu">
+          	<% current_user.teams.each do |t| %>
+          	<li>
+          		<%= link_to team_switch_path(t), method: :post do %>
+          			<%= t.name %>
+          		<% end %>
+          	</li>
+          	<% end %>
+          	<% if current_user.team %>
+          	<li role="separator" class="divider"></li>
+          	<% end %>
+            <li>
+            	<%= link_to new_team_path do %>
+                <span class="glyphicon glyphicon-plus"></span>
+                New Team
+              <% end %>
+            </li>
+          </ul>
+        </li>
+
+        <% if current_user.team %>
           <li>
-          	<%= link_to "New Team", new_team_path %>
+            <%= link_to team_memberships_path(current_user.team) do %>
+              <span class="glyphicon glyphicon-user"></span>
+              Members
+            <% end %>
           </li>
-        </ul>
-      </li>
-    </ul>
-    <% end %>
+        <% end # if current_user.team %>
+      </ul>
+    <% end # if current_user %>
 
   	<% if current_user %>
   	<%= link_to 'Sign Out', destroy_user_session_path, method: :delete,
