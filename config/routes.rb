@@ -21,8 +21,12 @@ Rails.application.routes.draw do
   end
 
   post   '/project/:id' => 'active_projects#create', as: 'active_project'
+  get    '/project/:id' => 'active_projects#show',   as: 'alt_project'
   delete '/project/all' => 'active_projects#destroy'
 
+  post   '/product/:id' => 'active_products#create', as: 'active_product'
+  get    '/product/:id' => 'active_products#show',   as: 'alt_product'
+  delete '/product/all' => 'active_products#destroy'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

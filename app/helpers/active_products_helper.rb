@@ -1,0 +1,2 @@
+module ActiveProductsHelper
+end

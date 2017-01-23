@@ -1,6 +1,10 @@
 class ActiveProjectsController < ApplicationController
 	before_action :authenticate_user!
 
+	def show
+		redirect_to project_path
+	end
+
 	def create
 		project = Project.find(params[:id])
 		if current_user.active_membership.update(active_project: project)

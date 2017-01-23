@@ -16,6 +16,10 @@ class User < ActiveRecord::Base
 		self.active_membership.active_project
 	end
 
+	def active_product
+		self.active_membership.active_product
+	end
+
 	def active_membership
 		self.team_memberships.find_by team_id: self.team_id
 	end

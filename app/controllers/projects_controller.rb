@@ -19,6 +19,8 @@ class ProjectsController < ApplicationController
       redirect_to new_team_path
     elsif current_user.active_project.nil?
       redirect_to projects_path
+    elsif current_user.active_product
+      redirect_to product_path(current_user.active_product)
     else
       set_project
       @products = @project.products.sorted

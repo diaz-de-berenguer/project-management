@@ -2,17 +2,30 @@
 	<div class="col-md-offset-2 col-md-8">
 
 		<div class="row">
-			<div class="col-md-12">
-
+			<div class="col-md-10">
 				<h2>
 					<small><%= @project.name %></small><br>
 					Products
 				</h2>
+			</div>
 
-				<%= link_to new_project_product_path(@project), class: "pull-right" do %>
-					<span class="glyphicon glyphicon-plus"></span>
-					New Product
-				<% end %>
+			<div class="col-md-2 center" style="padding-top:2em">
+					<%= link_to new_project_product_path(@project), class: "tooltipper", data:
+					    { toggle: "tooltip", placement: "bottom" }, title: "New Product" do %>
+					  <h2><i class="fa fa-plus-circle" aria-hidden="true"></i></h2>
+					<% end %>
+
+				<!-- <div style="padding: 1em 1em 0">
+					<%= link_to new_project_product_path(@project), class: "pull-right tooltipper", data:
+					    { toggle: "tooltip", placement: "bottom" }, title: "New Product" do %>
+	        	<h3>
+		        		<span class="fa-stack">
+		        		  <i class="fa fa-circle fa-stack-2x"></i>
+		        		  <i class="fa fa-plus fa-stack-1x fa-inverse"></i>
+		        		</span>
+		        </h3>
+					<% end %>
+				</div>-->
 			</div>
 		</div>
 
@@ -21,7 +34,7 @@
     <% @products.each do |product| %>
       <div class="row">
       	<div class="col-xs-10">
-        <%= link_to product do %>
+        <%= link_to active_product_path(product), method: :post do %>
         	<h3><%= product.name %></h3>
         <% end %>
         </div>

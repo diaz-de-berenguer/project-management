@@ -1,13 +1,49 @@
 <div class="container-fluid">
 	<div class="col-md-offset-2 col-md-8">
 
-		<h2>
-			<small>Product</small><br>
-			<%= @product.name %>
-		</h2>
+		<div class="row">
+			<div class="col-md-6">
+				<h2 class="pull-left">
+					<small>Product</small><br>
+					<%= @product.name %>
+				</h2>
+			</div>
 
-		<%= link_to 'Edit', edit_product_path(@product) %> |
-		<%= link_to 'Back', project_path(@product.project) %>
+			<div class="col-md-6">
+
+				<div style="padding: 1em 1em 0">
+	        <%= link_to product_all_path, class: "tooltipper pull-right", method: :delete, data:
+					    { toggle: "tooltip", placement: "bottom" }, title: "All Products",
+					    style: "margin-left: 3em" do %>
+	        	<h2>
+	        		<small>
+	        		<span class="fa-stack">
+	        		  <i class="fa fa-circle fa-stack-2x"></i>
+	        		  <i class="fa fa-chevron-left fa-stack-1x fa-inverse"></i>
+	        		</span>
+	        		</small>
+	        	</h2>
+	        <% end %>
+
+          <%= link_to edit_product_path, class: "tooltipper pull-right", data:
+  				    { toggle: "tooltip", placement: "bottom" }, title: "Edit Product",
+  				    style: "margin-left: 3em" do %>
+          	<h2>
+          		<small>
+          		<span class="fa-stack">
+          		  <i class="fa fa-circle fa-stack-2x"></i>
+          		  <i class="fa fa-wrench fa-stack-1x fa-inverse"></i>
+          		</span>
+          		</small>
+          	</h2>
+          <% end %>
+	      </div>
+			</div>
+		</div>
+
+		<hr>
+
+		<h3>Features:</h3>
 
 	</div>
 </div>
