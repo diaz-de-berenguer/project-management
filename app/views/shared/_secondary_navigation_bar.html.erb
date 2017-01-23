@@ -1,16 +1,28 @@
 <nav class="navbar navbar-default navbar-fixed-top" style="padding-top:50px;background-color:#fff;">
   <div class="container-fluid" style="padding: 0 5em">
-    <h3>
+    <h3 class='pull-left'>
       <%= current_user.active_project.name %>
-      <small>
-        <%= link_to 'Change Project', project_all_path, method: :delete %> |
-        <%= link_to edit_project_path(current_user.active_project) do %>
-        	<span class="fa-stack">
-        	  <i class="fa fa-circle fa-stack-2x"></i>
-        	  <i class="fa fa-wrench fa-stack-1x fa-inverse"></i>
-        	</span>
-        <% end %>
-      </small>
     </h3>
+
+    <%= link_to edit_project_path(current_user.active_project), class: "tooltipper pull-left", data:
+        { toggle: "tooltip", placement: "bottom" }, title: "Edit Project" do %>
+      <h3><small>
+      	<span class="fa-stack" style="margin: 0 2em;">
+      	  <i class="fa fa-circle fa-stack-2x"></i>
+      	  <i class="fa fa-wrench fa-stack-1x fa-inverse"></i>
+      	</span>
+      </small></h3>
+    <% end %>
+
+    <%= link_to project_all_path, method: :delete, class: "tooltipper pull-left", data:
+        { toggle: "tooltip", placement: "bottom" }, title: "Other Projects" do %>
+      <h3><small>
+      	<span class="fa-stack" style="margin-left: 0 2em;">
+      	  <i class="fa fa-circle fa-stack-2x" class="tooltipper"></i>
+      	  <i class="fa fa-list-ul fa-stack-1x fa-inverse"></i>
+      	</span>
+      </small></h3>
+    <% end %>
+
   </div>
 </nav>
