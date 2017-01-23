@@ -20,6 +20,7 @@ class Team < ActiveRecord::Base
 			else
 				user.team_id = nil
 			end
+			user.save
 		end
 	end
 
