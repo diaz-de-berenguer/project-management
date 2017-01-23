@@ -5,7 +5,9 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    if current_user.active_project.nil?
+    if current_user.team.nil?
+      redirect_to new_team_path
+    elsif current_user.active_project.nil?
       @projects = current_user.team.projects
     else
       redirect_to project_path(current_user.active_project)
