@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
-  root 'start#home'
+  # root 'start#home'
+  root 'projects#index'
 
   devise_for :users, controllers: {
     confirmations:      'users/confirmations',

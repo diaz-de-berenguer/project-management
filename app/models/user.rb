@@ -12,6 +12,14 @@ class User < ActiveRecord::Base
 
 	before_create :check_against_beta_invites
 
+	def active_project
+		self.active_membership.active_project
+	end
+
+	def active_membership
+		self.team_memberships.find_by team_id: self.team_id
+	end
+
 	private
 
 		def check_against_beta_invites

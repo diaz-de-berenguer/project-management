@@ -2,6 +2,7 @@ class TeamMembership < ActiveRecord::Base
 	validates_presence_of :user, :team
   belongs_to :user
   belongs_to :team
+  belongs_to :active_project, class_name: 'Project'
 
   before_destroy :remove_active_team
   after_create   :add_active_team

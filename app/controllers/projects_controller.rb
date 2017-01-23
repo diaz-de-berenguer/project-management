@@ -1,10 +1,17 @@
 class ProjectsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_project, only: [:show, :edit, :update, :destroy]
 
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.all
+    if current_user.team.nil?
+      redirect_to new_team_path
+    elsif current_user.active_project
+      redirect_to project_path(current_user.active_project)
+    else
+      @projects = current_user.team.projects
+    end
   end
 
   # GET /projects/1

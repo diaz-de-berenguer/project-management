@@ -3,6 +3,7 @@ class Team < ActiveRecord::Base
 
 	has_many :team_memberships #, dependent: :destroy
 	has_many :users, through: :team_memberships
+	has_many :projects
 
 	after_destroy :remove_user_team
 
