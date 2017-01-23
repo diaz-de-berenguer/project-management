@@ -1,4 +1,8 @@
-<nav class="navbar navbar-default navbar-fixed-top" style="padding-top:50px;z-index:-1;background-color:#fff;">
+<nav class="navbar navbar-default navbar-fixed-top" style="padding-top:50px;background-color:#fff;">
   <div class="container-fluid" style="padding: 0 5em">
+    <h3>
+      <%= current_user.active_project.name %>
+      <small><%= link_to 'Change Project', '#', method: :delete %></small>
+    </h3>
   </div>
 </nav>

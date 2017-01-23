@@ -7,8 +7,8 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-	<%= render 'shared/navigation_bar' %>
 	<%= render 'shared/secondary_navigation_bar' if @show_secondary_navigation_bar %>
+	<%= render 'shared/navigation_bar' %>
 	<div class="below-navigation-bar">
 		<div class="<%= 'below-navigation-bar' if @show_secondary_navigation_bar %>">
 			<div class="notice row center">

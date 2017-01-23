@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   end
 
   def secondary_navbar
-  	if current_user.active_project
+  	if current_user && current_user.active_project
 	  	@show_secondary_navigation_bar = true
 	  end
   end

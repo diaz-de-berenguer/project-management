@@ -1,22 +1,23 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :set_project, only: [:edit, :update, :destroy]
 
   # GET /projects
   # GET /projects.json
   def index
-    if current_user.team.nil?
-      redirect_to new_team_path
-    elsif current_user.active_project
-      redirect_to project_path(current_user.active_project)
-    else
-      @projects = current_user.team.projects
-    end
+    @projects = current_user.team.projects
   end
 
   # GET /projects/1
   # GET /projects/1.json
   def show
+    if current_user.team.nil?
+      redirect_to new_team_path
+    elsif current_user.active_project.nil?
+      redirect_to project_path(current_user.active_project)
+    else
+      set_project
+    end
   end
 
   # GET /projects/new
@@ -32,13 +33,20 @@ class ProjectsController < ApplicationController
   # POST /projects.json
   def create
     @project = Project.new(project_params)
+    @project.team = current_user.team
 
     respond_to do |format|
       if @project.save
-        format.html { redirect_to @project, notice: 'Project was successfully created.' }
-        format.json { render :show, status: :created, location: @project }
+        membership = current_user.active_membership
+        if membership.update active_project: @project
+          format.html { redirect_to @project }
+          format.json { render :show, status: :created, location: @project }
+        else
+          format.html { render :new, notice: "Something went wrong. #{error_messages membership}" }
+          format.json { render json: @project.errors, status: :unprocessable_entity }
+        end
       else
-        format.html { render :new }
+        format.html { render :new, notice: "Something went wrong. #{error_messages @project}" }
         format.json { render json: @project.errors, status: :unprocessable_entity }
       end
     end
