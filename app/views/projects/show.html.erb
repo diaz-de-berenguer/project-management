@@ -1,7 +1,30 @@
 <div class="container-fluid">
 	<div class="col-md-offset-2 col-md-8">
 
-		Hey there
+		<h2>
+			<small><%= @project.name %></small><br>
+			Products
+		</h2>
+		<%= link_to 'New Product', new_project_product_path(@project) %>
+
+		<hr>
+
+    <% @products.each do |product| %>
+      <div class="row">
+      	<div class="col-md-8">
+        <%= link_to product do %>
+        	<h3><%= product.name %></h3>
+        <% end %>
+        </div>
+        <div class="col-md-4">
+	        <%= link_to 'Edit', edit_product_path(product) %>
+	      </div>
+      </div>
+      <hr>
+    <% end %>
+
+
+
 
 	</div>
 </div>

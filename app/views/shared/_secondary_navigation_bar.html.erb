@@ -4,7 +4,7 @@
       <%= current_user.active_project.name %>
       <small>
         <%= link_to 'Change Project', project_all_path, method: :delete %> |
-        <%= link_to 'Edit', edit_project_path(@project) %>
+        <%= link_to 'Edit', edit_project_path(current_user.active_project) %>
       </small>
     </h3>
   </div>

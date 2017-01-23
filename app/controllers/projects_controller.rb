@@ -21,7 +21,7 @@ class ProjectsController < ApplicationController
       redirect_to projects_path
     else
       set_project
-      @products = @project.products
+      @products = @project.products.sorted
     end
   end
 

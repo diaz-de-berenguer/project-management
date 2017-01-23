@@ -1,0 +1,14 @@
+<div class="container-fluid">
+	<div class="col-md-offset-2 col-md-8">
+
+		<h2>
+			<small>Product</small><br>
+			<%= @product.name %>
+		</h2>
+
+		<%= link_to 'Edit', edit_product_path(@product) %> |
+		<%= link_to 'Back', project_path(@product.project) %>
+
+	</div>
+</div>
+

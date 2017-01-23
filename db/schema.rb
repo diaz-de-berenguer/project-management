@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20170123202824) do
 
   create_table "products", force: :cascade do |t|
     t.string   "name"
-    t.string   "description"
+    t.text     "description"
     t.integer  "project_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false

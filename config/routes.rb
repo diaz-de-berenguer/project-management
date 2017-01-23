@@ -16,10 +16,13 @@ Rails.application.routes.draw do
   end
   post "/teams/switch/:id" => 'teams#switch', as: 'team_switch'
 
-  resources :projects
+  resources :projects, shallow: true do
+    resources :products, except: :index
+  end
 
   post   '/project/:id' => 'active_projects#create', as: 'active_project'
   delete '/project/all' => 'active_projects#destroy'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
