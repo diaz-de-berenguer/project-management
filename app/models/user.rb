@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
 		if self.active_membership
 			self.active_membership.active_project
 		else
-			false
+			nil
 		end
 	end
 
@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
 		if self.active_membership
 			self.active_membership.active_product
 		else
-			false
+			nil
 		end
 	end
 
