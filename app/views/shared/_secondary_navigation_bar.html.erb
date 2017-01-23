@@ -4,7 +4,12 @@
       <%= current_user.active_project.name %>
       <small>
         <%= link_to 'Change Project', project_all_path, method: :delete %> |
-        <%= link_to 'Edit', edit_project_path(current_user.active_project) %>
+        <%= link_to edit_project_path(current_user.active_project) do %>
+        	<span class="fa-stack">
+        	  <i class="fa fa-circle fa-stack-2x"></i>
+        	  <i class="fa fa-wrench fa-stack-1x fa-inverse"></i>
+        	</span>
+        <% end %>
       </small>
     </h3>
   </div>

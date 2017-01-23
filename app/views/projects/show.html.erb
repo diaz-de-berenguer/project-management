@@ -1,23 +1,39 @@
 <div class="container-fluid">
 	<div class="col-md-offset-2 col-md-8">
 
-		<h2>
-			<small><%= @project.name %></small><br>
-			Products
-		</h2>
-		<%= link_to 'New Product', new_project_product_path(@project) %>
+		<div class="row">
+			<div class="col-md-12">
+
+				<h2>
+					<small><%= @project.name %></small><br>
+					Products
+				</h2>
+
+				<%= link_to new_project_product_path(@project), class: "pull-right" do %>
+					<span class="glyphicon glyphicon-plus"></span>
+					New Product
+				<% end %>
+			</div>
+		</div>
 
 		<hr>
 
     <% @products.each do |product| %>
       <div class="row">
-      	<div class="col-md-8">
+      	<div class="col-md-11">
         <%= link_to product do %>
         	<h3><%= product.name %></h3>
         <% end %>
         </div>
-        <div class="col-md-4">
-	        <%= link_to 'Edit', edit_product_path(product) %>
+        <div class="col-md-1 center">
+	        <%= link_to edit_product_path(product) do %>
+	        	<h3><small>
+	        		<span class="fa-stack">
+	        		  <i class="fa fa-circle fa-stack-2x"></i>
+	        		  <i class="fa fa-wrench fa-stack-1x fa-inverse"></i>
+	        		</span>
+	        	</small></h3>
+	        <% end %>
 	      </div>
       </div>
       <hr>
