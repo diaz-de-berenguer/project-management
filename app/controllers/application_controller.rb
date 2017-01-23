@@ -6,4 +6,8 @@ class ApplicationController < ActionController::Base
   def error_messages(model)
   	model.errors.full_messages.to_sentence
   end
+
+  def secondary_navbar
+  	@show_secondary_navigation_bar = true
+  end
 end
