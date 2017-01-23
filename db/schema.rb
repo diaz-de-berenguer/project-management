@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170123193147) do
+ActiveRecord::Schema.define(version: 20170123202824) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,16 @@ ActiveRecord::Schema.define(version: 20170123193147) do
 
   add_index "beta_user_invites", ["email"], name: "index_beta_user_invites_on_email", using: :btree
   add_index "beta_user_invites", ["user_id"], name: "index_beta_user_invites_on_user_id", using: :btree
+
+  create_table "products", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.integer  "project_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "products", ["project_id"], name: "index_products_on_project_id", using: :btree
 
   create_table "projects", force: :cascade do |t|
     t.string   "name"
@@ -76,6 +86,7 @@ ActiveRecord::Schema.define(version: 20170123193147) do
   add_index "users", ["team_id"], name: "index_users_on_team_id", using: :btree
 
   add_foreign_key "beta_user_invites", "users"
+  add_foreign_key "products", "projects"
   add_foreign_key "projects", "teams"
   add_foreign_key "team_memberships", "projects", column: "active_project_id"
   add_foreign_key "team_memberships", "teams"

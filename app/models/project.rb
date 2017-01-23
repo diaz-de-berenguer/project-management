@@ -1,5 +1,6 @@
 class Project < ActiveRecord::Base
   belongs_to :team
+  has_many   :products
 
   before_destroy :set_active_projects_to_nil
 
