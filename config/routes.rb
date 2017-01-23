@@ -18,6 +18,9 @@ Rails.application.routes.draw do
 
   resources :projects
 
+  post   '/project/:id' => 'active_projects#create', as: 'active_project'
+  delete '/project/all' => 'active_projects#destroy'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

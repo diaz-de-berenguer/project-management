@@ -2,7 +2,10 @@
   <div class="container-fluid" style="padding: 0 5em">
     <h3>
       <%= current_user.active_project.name %>
-      <small><%= link_to 'Change Project', '#', method: :delete %></small>
+      <small>
+        <%= link_to 'Change Project', project_all_path, method: :delete %> |
+        <%= link_to 'Edit', edit_project_path(@project) %>
+      </small>
     </h3>
   </div>
 </nav>

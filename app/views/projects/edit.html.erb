@@ -1,6 +1,15 @@
-<h1>Editing Project</h1>
+<div class="container-fluid">
+	<div class="col-md-offset-2 col-md-8">
 
-<%= render 'form' %>
+		<%= link_to 'Back', @project, class: 'pull-right' %>
+		<h1>Editing Project</h1>
+		<hr>
 
-<%= link_to 'Show', @project %> |
-<%= link_to 'Back', projects_path %>
+		<%= render 'form' %>
+
+		<hr>
+
+		<%= link_to 'Destroy', @project, method: :delete, data: { confirm: 'Are you sure?' } %>
+
+	</div>
+</div>
