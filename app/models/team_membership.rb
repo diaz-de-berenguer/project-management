@@ -3,6 +3,7 @@ class TeamMembership < ActiveRecord::Base
   belongs_to :user
   belongs_to :team
   belongs_to :active_project, class_name: 'Project'
+  belongs_to :active_product, class_name: 'Product'
 
   before_destroy :remove_active_team
   after_create   :add_active_team
