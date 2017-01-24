@@ -1,5 +1,7 @@
 class Product < ActiveRecord::Base
   belongs_to :project
+  acts_as_list scope: :project
+
   validates_presence_of :name, :project_id
 
   before_destroy :set_active_products_to_nil
