@@ -12,7 +12,7 @@
 					<hr>
 					<div class="row">
 						<div class="col-md-3 col-xs-4">
-							<%= feature.completed_date.strftime("%b/%m/%Y") %>
+							<%= feature.completed_date.strftime("%a, %b/%m/%Y") %>
 						</div>
 						<div class="col-md-9 col-xs-8">
 							<strong><%= feature.name %></strong><br>
@@ -36,13 +36,15 @@
 			<hr>
 			<div class="row">
 				<div class="col-md-3 col-xs-4">
+					<%# feature.completed_date.strftime("%A, %b/%m/%Y") %>
+					<%= feature.completed_date.strftime("%A") %> <br>
 					<%= feature.completed_date.strftime("%b/%m/%Y") %>
 				</div>
 				<div class="col-md-9 col-xs-8">
 					<strong><%= feature.name %></strong><br>
 					<small>
 						Product:
-						<%= feature.product.name %>
+						<%= link_to feature.product.name, active_product_path(feature.product) %>
 					</small>
 				</div>
 			</div>
