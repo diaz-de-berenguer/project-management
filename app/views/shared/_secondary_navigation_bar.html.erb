@@ -1,28 +1,42 @@
 <nav class="navbar navbar-default navbar-fixed-top" style="padding-top:50px;background-color:#fff;">
   <div class="container-fluid" style="padding: 0 5em">
     <h3 class='pull-left'>
-      <%= current_user.active_project.name %>
+      <%= link_to current_user.active_project.name, current_user.active_project %>
     </h3>
 
-    <%= link_to edit_project_path(current_user.active_project), class: "tooltipper pull-left", data:
-        { toggle: "tooltip", placement: "bottom" }, title: "Edit Project" do %>
-      <h3><small>
-      	<span class="fa-stack" style="margin: 0 2em;">
-      	  <i class="fa fa-circle fa-stack-2x"></i>
-      	  <i class="fa fa-wrench fa-stack-1x fa-inverse"></i>
-      	</span>
-      </small></h3>
-    <% end %>
+    <div class="pull-right">
+      <%= link_to edit_project_path(current_user.active_project), class: "tooltipper pull-left", data:
+          { toggle: "tooltip", placement: "bottom" }, title: "Edit Project" do %>
+        <h3><small>
+        	<span class="fa-stack" style="margin: 0 2em;">
+        	  <i class="fa fa-circle fa-stack-2x"></i>
+        	  <i class="fa fa-wrench fa-stack-1x fa-inverse"></i>
+        	</span>
+        </small></h3>
+      <% end %>
 
-    <%= link_to project_all_path, method: :delete, class: "tooltipper pull-left", data:
-        { toggle: "tooltip", placement: "bottom" }, title: "Other Projects" do %>
-      <h3><small>
-      	<span class="fa-stack" style="margin-left: 0 2em;">
-      	  <i class="fa fa-circle fa-stack-2x" class="tooltipper"></i>
-      	  <i class="fa fa-list-ul fa-stack-1x fa-inverse"></i>
-      	</span>
-      </small></h3>
-    <% end %>
+
+      <%= link_to complete_path, class: "tooltipper pull-left", data:
+          { toggle: "tooltip", placement: "bottom" }, title: "Completed Features" do %>
+        <h3><small>
+          <span class="fa-stack" style="margin: 0 2em;">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-check fa-stack-1x fa-inverse"></i>
+          </span>
+        </small></h3>
+      <% end %>
+
+
+      <%= link_to project_all_path, method: :delete, class: "tooltipper pull-left", data:
+          { toggle: "tooltip", placement: "bottom" }, title: "Other Projects" do %>
+        <h3><small>
+        	<span class="fa-stack" style="margin: 0 2em;">
+        	  <i class="fa fa-circle fa-stack-2x" class="tooltipper"></i>
+        	  <i class="fa fa-list-ul fa-stack-1x fa-inverse"></i>
+        	</span>
+        </small></h3>
+      <% end %>
+    </div>
 
   </div>
 </nav>

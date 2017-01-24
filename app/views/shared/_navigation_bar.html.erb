@@ -41,20 +41,15 @@
               Members
             <% end %>
           </li>
-
-          <li>
-            <%= link_to complete_path do %>
-              <i class="fa fa-check-square" aria-hidden="true"></i>
-              View Completed
-            <% end %>
-          </li>
         <% end # if current_user.team %>
       </ul>
     <% end # if current_user %>
 
   	<% if current_user %>
-  	<%= link_to 'Sign Out', destroy_user_session_path, method: :delete,
-  	    class: "navbar-text navbar-right navbar-link" %>
-  	<% end %>
+    <div class="pull-right">
+    	<%= link_to 'Sign Out', destroy_user_session_path, method: :delete,
+    	    class: "navbar-text navbar-right navbar-link" %>
+    	<% end %>
+    </div>
   </div>
 </nav>

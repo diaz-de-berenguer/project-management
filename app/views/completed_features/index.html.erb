@@ -1,2 +1,52 @@
-<h1>CompletedFeatures#index</h1>
-<p>Find me in app/views/completed_features/index.html.erb</p>
+<div class="container-fluid">
+	<div class="col-md-8 col-md-offset-2">
+
+		<% @completed_features.each do |hash| %>
+			<div style="padding-bottom:3em">
+				<h3>
+					<small>Project:</small><br>
+					<%= hash[:project].name %>
+				</h3>
+
+				<% hash[:features].each do |feature| %>
+					<hr>
+					<div class="row">
+						<div class="col-md-3 col-xs-4">
+							<%= feature.completed_date.strftime("%b/%m/%Y") %>
+						</div>
+						<div class="col-md-9 col-xs-8">
+							<strong><%= feature.name %></strong><br>
+							<small>
+								Product:
+								<%= feature.product.name %>
+							</small>
+						</div>
+					</div>
+				<% end %>
+				<hr>
+			</div>
+		<% end if false %>
+
+		<h3>
+			<small>Project:</small><br>
+			<%= current_user.active_project.name %>
+		</h3>
+
+		<% @completed_features.each do |feature| %>
+			<hr>
+			<div class="row">
+				<div class="col-md-3 col-xs-4">
+					<%= feature.completed_date.strftime("%b/%m/%Y") %>
+				</div>
+				<div class="col-md-9 col-xs-8">
+					<strong><%= feature.name %></strong><br>
+					<small>
+						Product:
+						<%= feature.product.name %>
+					</small>
+				</div>
+			</div>
+		<% end %>
+
+	</div>
+</div>

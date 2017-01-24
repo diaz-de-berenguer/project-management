@@ -10,4 +10,8 @@ class Project < ActiveRecord::Base
   	# set value to nil.
   	TeamMembership.where(active_project_id: self.id).map { |m| m.update(active_project_id: nil) }
   end
+
+  def features
+  	self.products.map(&:features).flatten
+  end
 end
