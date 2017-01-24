@@ -15,13 +15,7 @@
 				<%= feature.name %>
 			</span>
 			<div id="more-info-<%= feature.id %>" class="collapse">
-				<span style="font-size:1.25em"><div style="width:1.5em;float:left"></span>
-				<% if feature.completed %>
-				<i class="fa fa-check-square-o" aria-hidden="true"></i>
-				<% else %>
-				&nbsp;
-				<% end %>
-				</div>
+				<span style="font-size:1.25em"><div style="width:1.5em;float:left">&nbsp;</div></span>
 				<div style="float:left">
 					<hr>
 					<h4 style="font-weight:200">Description</h4>
@@ -39,7 +33,7 @@
 		</div>
 
 		<div class="col-md-1 col-xs-3 center">
-			<%= simple_form_for feature do |f| %>
+			<%= simple_form_for feature, remote: true do |f| %>
 				<%= f.hidden_field :scheduled, value: !feature.scheduled %>
 				<%= button_tag type: 'submit', class: 'btn', style: "background-color:transparent;padding:0" do %>
 					<% icon_class_s = feature.scheduled ? "fa-calendar-minus-o" : "fa-calendar-check-o" %>
@@ -49,7 +43,7 @@
 		</div>
 
 		<div class="col-md-1 col-xs-3 center">
-			<%= simple_form_for feature do |f| %>
+			<%= simple_form_for feature, remote: true do |f| %>
 				<%= f.hidden_field :completed, value: !feature.completed %>
 				<%= button_tag type: 'submit', class: 'btn', style: "background-color:transparent;padding:0" do %>
 					<% icon_class = feature.completed ? "fa-minus" : "fa-check" %>
