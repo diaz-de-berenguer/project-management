@@ -11,10 +11,10 @@
 	<%= render 'shared/navigation_bar' %>
 	<div class="below-navigation-bar">
 		<div class="<%= 'below-navigation-bar' if @show_secondary_navigation_bar %>">
-			<div class="notice row center">
+			<div class="notice container-fluid center">
 				<%= notice %>
 			</div>
-			<div class="alert row center">
+			<div class="alert container-fluid center">
 				<%= alert %>
 			</div>
 			<%= yield %>
