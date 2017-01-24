@@ -1,6 +1,6 @@
 class Product < ActiveRecord::Base
   belongs_to :project
-  acts_as_list scope: :project
+  has_many   :features, -> { order(position: :asc) }
 
   validates_presence_of :name, :project_id
 

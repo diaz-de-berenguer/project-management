@@ -1,6 +1,7 @@
 class Feature < ActiveRecord::Base
   belongs_to :product
-  has_many   :features, -> { order(position: :asc) }
+  acts_as_list scope: :product
+
   validates_presence_of :name, :product_id
 
   after_create :add_mvp_and_demo
