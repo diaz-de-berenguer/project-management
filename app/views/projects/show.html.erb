@@ -35,7 +35,8 @@
       <div class="row">
       	<div class="col-xs-10">
         <%= link_to active_product_path(product), method: :post do %>
-        	<h3><%= product.name %></h3>
+        	<h3 style='margin:0'><%= product.name %></h3>
+        	<p style='margin:0'><%= pluralize(product.features.count, 'Incomplete Feature') %></p>
         <% end %>
         </div>
         <div class="col-xs-2 center">
