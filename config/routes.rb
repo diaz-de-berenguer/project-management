@@ -17,7 +17,9 @@ Rails.application.routes.draw do
   post "/teams/switch/:id" => 'teams#switch', as: 'team_switch'
 
   resources :projects, shallow: true do
-    resources :products, except: :index
+    resources :products, except: :index do
+      resources :features, except: :index
+    end
   end
 
   post   '/project/:id' => 'active_projects#create', as: 'active_project'

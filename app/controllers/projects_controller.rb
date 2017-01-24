@@ -51,11 +51,11 @@ class ProjectsController < ApplicationController
           format.html { redirect_to @project }
           format.json { render :show, status: :created, location: @project }
         else
-          format.html { render :new, notice: "Something went wrong. #{error_messages membership}" }
+          format.html { render :new, notice: "Something went wrong. #{error_message_for membership}" }
           format.json { render json: @project.errors, status: :unprocessable_entity }
         end
       else
-        format.html { render :new, notice: "Something went wrong. #{error_messages @project}" }
+        format.html { render :new, notice: "Something went wrong. #{error_message_for @project}" }
         format.json { render json: @project.errors, status: :unprocessable_entity }
       end
     end

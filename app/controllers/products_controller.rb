@@ -10,6 +10,8 @@ class ProductsController < ApplicationController
   # GET /products/1
   # GET /products/1.json
   def show
+    @completed_features = @product.completed_features
+    @active_features    = @product.active_features
   end
 
   # GET /products/new

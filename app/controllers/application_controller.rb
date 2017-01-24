@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :secondary_navbar
 
-  def error_messages(model)
+  def error_message_for(model)
   	model.errors.full_messages.to_sentence
   end
 

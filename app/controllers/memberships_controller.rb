@@ -21,7 +21,7 @@ class MembershipsController < ApplicationController
 			if membership.save
 				redirect_to team_memberships_path
 			else
-				flash.now[:notice] = "Something went wrong. #{error_messages membership}"
+				flash.now[:notice] = "Something went wrong. #{error_message_for membership}"
 				render :new
 			end
 		end

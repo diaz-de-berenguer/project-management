@@ -24,11 +24,11 @@ class TeamsController < ApplicationController
 	  		redirect_to root_path
 	  	else
 	  		@team.destroy
-	  		flash[:notice] = "Unable to create team. #{error_messages membership}"
+	  		flash[:notice] = "Unable to create team. #{error_message_for membership}"
 	  		render :new
 	  	end
   	else
-  		flash[:notice] = "Unable to create team. #{error_messages @team}"
+  		flash[:notice] = "Unable to create team. #{error_message_for @team}"
   		render :new
   	end
   end
