@@ -13,19 +13,11 @@ class User < ActiveRecord::Base
 	before_create :check_against_beta_invites
 
 	def active_project
-		if self.active_membership
-			self.active_membership.active_project
-		else
-			nil
-		end
+		self.active_membership ? self.active_membership.active_project : nil
 	end
 
 	def active_product
-		if self.active_membership
-			self.active_membership.active_product
-		else
-			nil
-		end
+		self.active_membership ? self.active_membership.active_product : nil
 	end
 
 	def active_membership
