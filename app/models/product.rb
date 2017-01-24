@@ -29,7 +29,7 @@ class Product < ActiveRecord::Base
 	  end
 
     def add_mvp_and_demo
-      # Create two features?
-      self.features.build(name: "Example Feature", description: "Something more insightful here...").save
+      # # Create a feature?
+      # self.features.build(name: "Example Feature", description: "Something more insightful here...").save
     end
 end
