@@ -34,7 +34,7 @@
 			<%= button_tag class: 'btn', style: "background-color:transparent;padding:0",
 			    data: { toggle: "collapse", target: "#more-info-#{feature.id}" } do %>
 				<% icon_class = feature.scheduled ? "fa-calendar-minus-o" : "fa-calendar-check-o" %>
-				<i class="fa fa-lg fa-info" aria-hidden="true"></i>
+				<i class="tooltipper fa fa-lg fa-info" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" }, title="More Info"></i>
 			<% end %>
 		</div>
 
@@ -43,7 +43,7 @@
 				<%= f.hidden_field :scheduled, value: !feature.scheduled %>
 				<%= button_tag type: 'submit', class: 'btn', style: "background-color:transparent;padding:0" do %>
 					<% icon_class_s = feature.scheduled ? "fa-calendar-minus-o" : "fa-calendar-check-o" %>
-					<i class="fa fa-lg <%= icon_class_s %>" aria-hidden="true"></i>
+					<i class="tooltipper fa fa-lg <%= icon_class_s %>" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" }, title="<%= feature.scheduled ? 'Remove from' : 'Add to' %> schedule"></i>
 				<% end %>
 			<% end %>
 		</div>
@@ -53,17 +53,16 @@
 				<%= f.hidden_field :completed, value: !feature.completed %>
 				<%= button_tag type: 'submit', class: 'btn', style: "background-color:transparent;padding:0" do %>
 					<% icon_class = feature.completed ? "fa-minus" : "fa-check" %>
-					<i class="fa fa-lg <%= icon_class %>" aria-hidden="true"></i>
+					<i class="tooltipper fa fa-lg <%= icon_class %>" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" }, title="Mark as <%= feature.completed ? "incomplete" : "complete" %>"></i>
 				<% end %>
 			<% end %>
-			<i class="fa fa-lg " aria-hidden="true"></i>
 		</div>
 
 		<div class="col-md-1 col-xs-3 center">
-			<!-- <i class="fa fa-lg fa-trash-o" aria-hidden="true"></i> -->
+			<!-- <i class="tooltipper fa fa-lg fa-trash-o" aria-hidden="true"></i data-toggle="tooltip" data-placement="bottom" }, title="All Products"> -->
 			<%= link_to edit_feature_path(feature), class: 'btn', remote: true,
 			    style: "background-color:transparent;padding:0;color:black" do %>
-				<i class="fa fa-lg fa-wrench" aria-hidden="true"></i>
+				<i class="tooltipper fa fa-lg fa-wrench" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" }, title="Edit Feature"></i>
 			<% end %>
 		</div>
 
