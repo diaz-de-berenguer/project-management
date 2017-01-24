@@ -16,7 +16,7 @@ class ActiveProjectsController < ApplicationController
 	end
 
 	def destroy
-		if current_user.active_membership.update(active_project_id: nil)
+		if current_user.active_membership.update(active_project_id: nil, active_product_id: nil)
 			redirect_to root_path
 		else
 			flash[:notice] = "Something went wrong!"
