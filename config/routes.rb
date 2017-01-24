@@ -30,6 +30,8 @@ Rails.application.routes.draw do
   get    '/product/:id' => 'active_products#show',   as: 'alt_product'
   delete '/product/all' => 'active_products#destroy'
 
+  get '/complete' => 'completed_features#index'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
