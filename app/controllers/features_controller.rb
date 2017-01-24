@@ -21,6 +21,7 @@ class FeaturesController < ApplicationController
 
   # GET /features/1/edit
   def edit
+    respond_to :js
   end
 
   # POST /features
