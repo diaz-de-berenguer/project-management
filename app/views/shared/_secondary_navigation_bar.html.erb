@@ -1,7 +1,7 @@
 <nav class="navbar navbar-default navbar-fixed-top" style="padding-top:50px;background-color:#fff;">
   <div class="container-fluid" style="padding: 0 5em">
     <h3 class='pull-left'>
-      <%= link_to current_user.active_project.name, current_user.active_project %>
+      <%= link_to current_user.active_project.name, product_all_path, method: :delete %>
     </h3>
 
     <div class="pull-right">
