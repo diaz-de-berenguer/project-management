@@ -1,6 +1,6 @@
 class Product < ActiveRecord::Base
   belongs_to :project
-  has_many   :features, -> { order(position: :asc) }
+  has_many   :features, -> { order(position: :asc) }, dependent: :destroy
 
   validates_presence_of :name, :project_id
 

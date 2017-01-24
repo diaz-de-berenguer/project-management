@@ -26,11 +26,12 @@ class FeaturesController < ApplicationController
   # POST /features
   # POST /features.json
   def create
-    @feature = Feature.new(feature_params)
+    @product = Product.find params[:product_id]
+    @feature = @product.features.build(feature_params)
 
     respond_to do |format|
       if @feature.save
-        format.html { redirect_to @feature, notice: 'Feature was successfully created.' }
+        format.html { redirect_to product_path(@feature.product), notice: 'Feature was successfully created.' }
         format.json { render :show, status: :created, location: @feature }
       else
         format.html { render :new }

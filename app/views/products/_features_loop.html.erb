@@ -1,51 +1,71 @@
 <% scheduled_style = feature.scheduled ? "background-color:rgb(246, 250, 252)" : "" %>
-<%= content_tag :div, class: 'outter-shell' do %>
-	<div style="padding:1.5em 0;border-top:1px solid #ddd;<%= scheduled_style %>">
-		<div class="row">
 
-			<div class="col-md-8">
-				<span style="font-size:1.25em">
-					<div style="width:1.5em;float:left">
-					<% if feature.completed %>
-					<i class="fa fa-check-square-o" aria-hidden="true"></i>
-					<% else %>
-					&nbsp;
-					<% end %>
-					</div>
-					<%= feature.name %>
-				</span>
-			</div>
+<div style="padding:1.5em 0;border-top:1px solid #ddd;<%= scheduled_style %>">
+	<div class="row">
 
-			<div class="col-md-1 col-xs-3 center">
-				<i class="fa fa-lg fa-info" aria-hidden="true"></i>
-			</div>
-
-			<div class="col-md-1 col-xs-3 center">
-				<%= simple_form_for feature do |f| %>
-					<%= f.hidden_field :scheduled, value: !feature.scheduled %>
-					<%= button_tag type: 'submit', class: 'btn', style: "background-color:transparent;padding:0" do %>
-						<% icon_class = feature.scheduled ? "fa-calendar-minus-o" : "fa-calendar-check-o" %>
-						<i class="fa fa-lg <%= icon_class %>" aria-hidden="true"></i>
-					<% end %>
+		<div class="col-md-8">
+			<span style="font-size:1.25em">
+				<div style="width:1.5em;float:left">
+				<% if feature.completed %>
+				<i class="fa fa-check-square-o" aria-hidden="true"></i>
+				<% else %>
+				&nbsp;
 				<% end %>
-			</div>
-
-			<div class="col-md-1 col-xs-3 center">
-				<%= simple_form_for feature do |f| %>
-					<%= f.hidden_field :completed, value: !feature.completed %>
-					<%= button_tag type: 'submit', class: 'btn', style: "background-color:transparent;padding:0" do %>
-						<% icon_class = feature.completed ? "fa-minus" : "fa-check" %>
-						<i class="fa fa-lg <%= icon_class %>" aria-hidden="true"></i>
-					<% end %>
+				</div>
+				<%= feature.name %>
+			</span>
+			<div id="more-info-<%= feature.id %>" class="collapse">
+				<span style="font-size:1.25em"><div style="width:1.5em;float:left"></span>
+				<% if feature.completed %>
+				<i class="fa fa-check-square-o" aria-hidden="true"></i>
+				<% else %>
+				&nbsp;
 				<% end %>
-				<i class="fa fa-lg " aria-hidden="true"></i>
+				</div>
+				<div style="float:left">
+					<hr>
+					<h4 style="font-weight:200">Description</h4>
+					<small><%= feature.description %></small>
+				</div>
 			</div>
-
-			<div class="col-md-1 col-xs-3 center">
-				<!-- <i class="fa fa-lg fa-trash-o" aria-hidden="true"></i> -->
-				<i class="fa fa-lg fa-wrench" aria-hidden="true"></i>
-			</div>
-
 		</div>
+
+		<div class="col-md-1 col-xs-3 center">
+			<%= button_tag class: 'btn', style: "background-color:transparent;padding:0",
+			    data: { toggle: "collapse", target: "#more-info-#{feature.id}" } do %>
+				<% icon_class = feature.scheduled ? "fa-calendar-minus-o" : "fa-calendar-check-o" %>
+				<i class="fa fa-lg fa-info" aria-hidden="true"></i>
+			<% end %>
+		</div>
+
+		<div class="col-md-1 col-xs-3 center">
+			<%= simple_form_for feature do |f| %>
+				<%= f.hidden_field :scheduled, value: !feature.scheduled %>
+				<%= button_tag type: 'submit', class: 'btn', style: "background-color:transparent;padding:0" do %>
+					<% icon_class_s = feature.scheduled ? "fa-calendar-minus-o" : "fa-calendar-check-o" %>
+					<i class="fa fa-lg <%= icon_class_s %>" aria-hidden="true"></i>
+				<% end %>
+			<% end %>
+		</div>
+
+		<div class="col-md-1 col-xs-3 center">
+			<%= simple_form_for feature do |f| %>
+				<%= f.hidden_field :completed, value: !feature.completed %>
+				<%= button_tag type: 'submit', class: 'btn', style: "background-color:transparent;padding:0" do %>
+					<% icon_class = feature.completed ? "fa-minus" : "fa-check" %>
+					<i class="fa fa-lg <%= icon_class %>" aria-hidden="true"></i>
+				<% end %>
+			<% end %>
+			<i class="fa fa-lg " aria-hidden="true"></i>
+		</div>
+
+		<div class="col-md-1 col-xs-3 center">
+			<!-- <i class="fa fa-lg fa-trash-o" aria-hidden="true"></i> -->
+			<%= link_to edit_feature_path(feature), class: 'btn', remote: true,
+			    style: "background-color:transparent;padding:0;color:black" do %>
+				<i class="fa fa-lg fa-wrench" aria-hidden="true"></i>
+			<% end %>
+		</div>
+
 	</div>
-<% end %>
+</div>

@@ -22,6 +22,7 @@ class ProductsController < ApplicationController
 
   # GET /products/1/edit
   def edit
+    respond_to :js
   end
 
   # POST /products
