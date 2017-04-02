@@ -3,34 +3,55 @@
 <div style="padding:1.5em 1em;border-top:1px solid #ddd;<%= scheduled_style %>">
 	<div class="row">
 
-		<div class="col-md-8">
-			<span style="font-size:1.25em">
-				<div style="width:1.5em;float:left">
-				<% if feature.completed %>
-				<i class="fa fa-check-square-o" aria-hidden="true"></i>
-				<% else %>
-				<i class="fa fa-square-o" aria-hidden="true"></i>
+		<div class="col-xs-1">
+			<%= simple_form_for feature, remote: true do |f| %>
+				<%= f.hidden_field :completed, value: !feature.completed %>
+				<%= button_tag type: 'submit', class: 'btn', style: "background-color:transparent;padding:0" do %>
+					<% icon_class = feature.completed ? "fa-square-o" : "fa-check-square-o" %>
+					<i class="tooltipper fa fa-lg <%= icon_class %>" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" }, title="Mark as <%= feature.completed ? "incomplete" : "complete" %>"></i>
 				<% end %>
-				</div>
-				<%= feature.name %>
-			</span>
+			<% end %>
+		</div>
+
+		<div class="col-md-9 col-xs-11">
+<!--				<div style="width:1.5em;float:left">
+ 					<% if feature.completed %>
+						<i class="fa fa-check-square-o" aria-hidden="true"></i>
+					<% else %>
+						<i class="fa fa-square-o" aria-hidden="true"></i>
+					<% end %>
+
+
+
+				</div> -->
+
+				<%= button_tag class: 'btn btn-block', style: "background-color:transparent;padding:0;text-align: left;",
+				    data: { toggle: "collapse", target: "#more-info-#{feature.id}" } do %>
+					<span style="font-size:1.25em">
+						<%= feature.name %>
+					</span>
+				<% end %>
 			<div id="more-info-<%= feature.id %>" class="collapse">
-				<span style="font-size:1.25em"><div style="width:1.5em;float:left">&nbsp;</div></span>
+				<!-- <span style="font-size:1.25em"><div style="width:1.5em;float:left">&nbsp;</div></span> -->
 				<div style="float:left">
 					<hr>
-					<h4 style="font-weight:200">Description</h4>
+					<p style="font-weight:500">
+						Estimated Time:
+						<%= feature.estimated_days ? pluralize(feature.estimated_days, "Day") : "--"  %>
+					</p>
+					<p style="font-weight:500">Description</p>
 					<p><%= markdown feature.description %></p>
 				</div>
 			</div>
 		</div>
 
-		<div class="col-md-1 col-xs-3 center">
+<!-- 		<div class="col-md-1 col-xs-3 center">
 			<%= button_tag class: 'btn', style: "background-color:transparent;padding:0",
 			    data: { toggle: "collapse", target: "#more-info-#{feature.id}" } do %>
 				<% icon_class = feature.scheduled ? "fa-calendar-minus-o" : "fa-calendar-check-o" %>
 				<i class="tooltipper fa fa-lg fa-info" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" }, title="More Info"></i>
 			<% end %>
-		</div>
+		</div> -->
 
 		<div class="col-md-1 col-xs-3 center">
 			<%= simple_form_for feature, remote: true do |f| %>
@@ -42,7 +63,7 @@
 			<% end %>
 		</div>
 
-		<div class="col-md-1 col-xs-3 center">
+<!-- 		<div class="col-md-1 col-xs-3 center">
 			<%= simple_form_for feature, remote: true do |f| %>
 				<%= f.hidden_field :completed, value: !feature.completed %>
 				<%= button_tag type: 'submit', class: 'btn', style: "background-color:transparent;padding:0" do %>
@@ -50,7 +71,7 @@
 					<i class="tooltipper fa fa-lg <%= icon_class %>" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" }, title="Mark as <%= feature.completed ? "incomplete" : "complete" %>"></i>
 				<% end %>
 			<% end %>
-		</div>
+		</div> -->
 
 		<div class="col-md-1 col-xs-3 center">
 			<!-- <i class="tooltipper fa fa-lg fa-trash-o" aria-hidden="true"></i data-toggle="tooltip" data-placement="bottom" }, title="All projects"> -->
