@@ -15,10 +15,10 @@ class Project < ActiveRecord::Base
   # 	self.products.map(&:features).flatten
   # end
 
-  belongs_to :project
+  belongs_to :product
   has_many   :features, -> { order(position: :asc) }, dependent: :destroy
 
-  validates_presence_of :name, :project_id
+  validates_presence_of :name, :product_id
 
   before_destroy :set_active_products_to_nil
 

@@ -35,7 +35,7 @@ class Product < ActiveRecord::Base
 
 
   belongs_to :team
-  has_many   :products
+  has_many   :projects
   validates_presence_of :name, :team_id
 
   before_destroy :set_active_projects_to_nil
@@ -47,6 +47,6 @@ class Product < ActiveRecord::Base
   end
 
   def features
-    self.products.map(&:features).flatten
+    self.projects.map(&:features).flatten
   end
 end

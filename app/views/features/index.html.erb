@@ -15,6 +15,9 @@
           <%= feature.created_at.strftime("%b/%m/%Y") %>
         </div>
         <div class="col-md-9 col-xs-8">
+          <% if feature.completed %>
+            <span class="glyphicon glyphicon-ok" style="margin-left:0em"></span>
+          <% end %>
           <strong><%= feature.name %></strong><br>
           <small>
             Project:

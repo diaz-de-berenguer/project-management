@@ -29,7 +29,7 @@ class FeaturesController < ApplicationController
   # POST /features
   # POST /features.json
   def create
-    @project = project.find params[:project_id]
+    @project = Project.find params[:project_id]
     @feature = @project.features.build(feature_params)
 
     respond_to do |format|
