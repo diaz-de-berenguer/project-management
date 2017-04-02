@@ -2,7 +2,11 @@ class ActiveProjectsController < ApplicationController
 	before_action :authenticate_user!
 
 	def show
-		redirect_to project_path
+		if params[:id] == 'all'
+			redirect_to projects_path
+		else
+			redirect_to project_path
+		end
 	end
 
 	def create
@@ -16,7 +20,7 @@ class ActiveProjectsController < ApplicationController
 	end
 
 	def destroy
-		if current_user.active_membership.update(active_project_id: nil, active_product_id: nil)
+		if current_user.active_membership.update(active_project_id: nil)
 			redirect_to root_path
 		else
 			flash[:notice] = "Something went wrong!"

@@ -1,4 +1,5 @@
-<%= simple_form_for(@project) do |f| %>
+<% url_path = @project.new_record? ? product_projects_path(@product) : project_path(@project) %>
+<%= simple_form_for @project, url: url_path do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">

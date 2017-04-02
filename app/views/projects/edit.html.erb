@@ -1,15 +1,16 @@
 <div class="container-fluid">
 	<div class="col-md-offset-2 col-md-8">
 
-		<%= link_to 'Back', @project, class: 'pull-right' %>
-		<h1>Editing Project</h1>
-		<hr>
+		<%= link_to 'Back', product_path(@project.product), class: "pull-right" %>
+		<h1>Editing project</h1>
 
 		<%= render 'form' %>
 
 		<hr>
-
-		<%= link_to 'Destroy', @project, method: :delete, data: { confirm: 'Are you sure?' } %>
+		<%= link_to 'Destroy', @project, method: :delete, data: { confirm: 'Are you sure? Deleting this project will destroy all the associated data.' } %>
 
 	</div>
 </div>
+
+
+

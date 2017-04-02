@@ -1,98 +1,78 @@
 class ProjectsController < ApplicationController
-  before_action :authenticate_user!
-  before_action :set_project, only: [:edit, :update, :destroy]
+  before_action :set_tempproj, only: [:show, :edit, :update, :destroy]
 
-  # GET /projects
-  # GET /projects.json
+  # GET /project
+  # GET /project.json
   def index
-    if current_user.team.nil?
-      redirect_to new_team_path
-    elsif current_user.active_project.nil?
-      @projects = current_user.team.projects
-    else
-      redirect_to project_path(current_user.active_project)
-    end
+    @project = Tempproj.all
   end
 
-  # GET /projects/1
-  # GET /projects/1.json
+  # GET /project/1
+  # GET /project/1.json
   def show
-    if current_user.team.nil?
-      redirect_to new_team_path
-    elsif current_user.active_project.nil?
-      redirect_to projects_path
-    elsif current_user.active_product
-      redirect_to product_path(current_user.active_product)
-    else
-      set_project
-      @products = @project.products.sorted
-    end
+    @completed_features = @tempproj.completed_features
+    @active_features    = @tempproj.active_features
   end
 
-  # GET /projects/new
+  # GET /project/new
   def new
-    @project = Project.new
+    @product = Product.find params[:product_id]
+    @tempproj = @product.project.build
   end
 
-  # GET /projects/1/edit
+  # GET /project/1/edit
   def edit
   end
 
-  # POST /projects
-  # POST /projects.json
+  # POST /project
+  # POST /project.json
   def create
-    @project = Project.new(project_params)
-    @project.team = current_user.team
+    @product = Product.find params[:product_id]
+    @tempproj = @product.project.build(tempproj_params)
 
     respond_to do |format|
-      if @project.save
-        membership = current_user.active_membership
-        if membership.update active_project: @project
-          format.html { redirect_to @project }
-          format.json { render :show, status: :created, location: @project }
-        else
-          format.html { render :new, notice: "Something went wrong. #{error_message_for membership}" }
-          format.json { render json: @project.errors, status: :unprocessable_entity }
-        end
+      if @tempproj.save
+        format.html { redirect_to @tempproj, notice: 'tempproj was successfully created.' }
+        format.json { render :show, status: :created, location: @tempproj }
       else
-        format.html { render :new, notice: "Something went wrong. #{error_message_for @project}" }
-        format.json { render json: @project.errors, status: :unprocessable_entity }
+        format.html { render :new }
+        format.json { render json: @tempproj.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # PATCH/PUT /projects/1
-  # PATCH/PUT /projects/1.json
+  # PATCH/PUT /project/1
+  # PATCH/PUT /project/1.json
   def update
     respond_to do |format|
-      if @project.update(project_params)
-        format.html { redirect_to @project, notice: 'Project was successfully updated.' }
-        format.json { render :show, status: :ok, location: @project }
+      if @tempproj.update(tempproj_params)
+        format.html { redirect_to @tempproj, notice: 'tempproj was successfully updated.' }
+        format.json { render :show, status: :ok, location: @tempproj }
       else
         format.html { render :edit }
-        format.json { render json: @project.errors, status: :unprocessable_entity }
+        format.json { render json: @tempproj.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # DELETE /projects/1
-  # DELETE /projects/1.json
+  # DELETE /project/1
+  # DELETE /project/1.json
   def destroy
-    @project.destroy
+    @tempproj.destroy
     respond_to do |format|
-      format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
+      format.html { redirect_to products_url(@tempproj.product), notice: 'tempproj was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_project
-      @project = Project.find(params[:id])
+    def set_tempproj
+      @tempproj = Tempproj.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def project_params
-      params.require(:project).permit(:name, :description)
+    def tempproj_params
+      params.require(:tempproj).permit(:name, :description)
     end
 end

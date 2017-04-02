@@ -4,9 +4,9 @@ class FeaturesController < ApplicationController
   # # GET /features
   # # GET /features.json
   def index
-    # @project  = Project.find(params[:project_id])
-    @project  = current_user.active_project
-    @features = @project.products.map(&:features).flatten.sort_by(&:created_at).reverse
+    # @product  = Product.find(params[:product_id])
+    @product  = current_user.active_product
+    @features = @product.projects.map(&:features).flatten.sort_by(&:created_at).reverse
   end
 
   # GET /features/1
@@ -29,12 +29,12 @@ class FeaturesController < ApplicationController
   # POST /features
   # POST /features.json
   def create
-    @product = Product.find params[:product_id]
-    @feature = @product.features.build(feature_params)
+    @project = project.find params[:project_id]
+    @feature = @project.features.build(feature_params)
 
     respond_to do |format|
       if @feature.save
-        format.html { redirect_to product_path(@feature.product), notice: 'Feature was successfully created.' }
+        format.html { redirect_to project_path(@feature.project), notice: 'Feature was successfully created.' }
         format.json { render :show, status: :created, location: @feature }
       else
         format.html { render :new }
@@ -48,7 +48,7 @@ class FeaturesController < ApplicationController
   def update
     respond_to do |format|
       if @feature.update(feature_params)
-        format.html { redirect_to product_path(@feature.product) }
+        format.html { redirect_to project_path(@feature.project) }
         # format.json { render :show, status: :ok, location: @feature }
         format.js
       else
@@ -64,7 +64,7 @@ class FeaturesController < ApplicationController
   def destroy
     @feature.destroy
     respond_to do |format|
-      format.html { redirect_to product_path(@feature.product), notice: 'Feature was successfully destroyed.' }
+      format.html { redirect_to project_path(@feature.project), notice: 'Feature was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

@@ -2,60 +2,88 @@
 	<div class="col-md-offset-2 col-md-8">
 
 		<div class="row">
-			<div class="col-md-10">
-				<h2>
-					<small><%= @project.name %></small><br>
-					Products
+			<div class="col-md-6">
+				<h2 class="pull-left">
+					<small>Project</small><br>
+					<%= @project.name %>
 				</h2>
 			</div>
 
-			<div class="col-md-2 center" style="padding-top:2em">
-					<%= link_to new_project_product_path(@project), class: "tooltipper", data:
-					    { toggle: "tooltip", placement: "bottom" }, title: "New Product" do %>
-					  <h2><i class="fa fa-plus-circle" aria-hidden="true"></i></h2>
-					<% end %>
+			<div class="col-md-6">
 
-				<!-- <div style="padding: 1em 1em 0">
-					<%= link_to new_project_product_path(@project), class: "pull-right tooltipper", data:
-					    { toggle: "tooltip", placement: "bottom" }, title: "New Product" do %>
-	        	<h3>
-		        		<span class="fa-stack">
-		        		  <i class="fa fa-circle fa-stack-2x"></i>
-		        		  <i class="fa fa-plus fa-stack-1x fa-inverse"></i>
-		        		</span>
-		        </h3>
-					<% end %>
-				</div>-->
+				<div style="padding: 1em 1em 0">
+	        <%= link_to project_all_path, class: "tooltipper pull-right", method: :delete, data:
+					    { toggle: "tooltip", placement: "bottom" }, title: "All projects",
+					    style: "margin-left: 3em" do %>
+	        	<h2>
+	        		<small>
+	        		<span class="fa-stack">
+	        		  <i class="fa fa-circle fa-stack-2x"></i>
+	        		  <i class="fa fa-chevron-left fa-stack-1x fa-inverse"></i>
+	        		</span>
+	        		</small>
+	        	</h2>
+	        <% end %>
+
+          <%= link_to edit_project_path, class: "tooltipper pull-right", data:
+  				    { toggle: "tooltip", placement: "bottom" }, title: "Edit project",
+  				    style: "margin-left: 3em" do %>
+          	<h2>
+          		<small>
+          		<span class="fa-stack">
+          		  <i class="fa fa-circle fa-stack-2x"></i>
+          		  <i class="fa fa-wrench fa-stack-1x fa-inverse"></i>
+          		</span>
+          		</small>
+          	</h2>
+          <% end %>
+	      </div>
 			</div>
 		</div>
 
 		<hr>
 
-    <% @products.each do |product| %>
-      <div class="row">
-      	<div class="col-xs-10">
-        <%= link_to active_product_path(product), method: :post do %>
-        	<h3 style='margin:0'><%= product.name %></h3>
-        	<h4 style='margin:0'><small><%= pluralize(product.active_features.count, 'Incomplete Feature') %></small></h4>
-        <% end %>
-        </div>
-        <div class="col-xs-2 center">
-	        <%= link_to edit_product_path(product), class: "tooltipper", data:
-					    { toggle: "tooltip", placement: "bottom" }, title: "Edit Product" do %>
-	        	<h3 style='margin:0'><small>
-	        		<span class="fa-stack">
-	        		  <i class="fa fa-circle fa-stack-2x"></i>
-	        		  <i class="fa fa-wrench fa-stack-1x fa-inverse"></i>
-	        		</span>
-	        	</small></h3>
-	        <% end %>
-	      </div>
-      </div>
-      <hr>
-    <% end %>
+		<div class="row" style="padding-bottom:1em">
+			<div class="col-md-12">
+				<h3>Features:</h3>
+			</div>
+			<div class="col-md-4 col-xs-6">
+				<%= link_to '#new-feature', data: { toggle: "collapse" } do %>
+					<h3 class="pull-left" style="margin:-3px 7px 0">
+						<i class="fa fa-plus-circle" aria-hidden="true"></i>
+					</h3>
+					New Feature
+				<% end %>
+			</div>
+			<div class="col-md-4 col-xs-6">
+				<%= link_to '#completed-features', data: { toggle: "collapse" } do %>
+					<h3 class="pull-left" style="margin:-3px 7px 0">
+						<i class="fa fa-check-circle" aria-hidden="true"></i>
+					</h3>
+					Show Completed (<%= @completed_features.count %>)
+				<% end %>
+			</div>
+		</div>
 
+		<div id="new-feature" class="collapse">
+			<%= render 'features/form', feature: @project.features.build %>
+		</div>
 
+		<div id="completed-features" class="collapse">
+			<% @completed_features.each do |f| %>
+				<%= content_tag :div, id: "feature-#{f.id}" do %>
+					<%= render 'features_loop', feature: f %>
+				<% end %>
+			<% end %>
+		</div>
+
+		<% @active_features.each do |f| %>
+			<%= content_tag :div, id: "feature-#{f.id}" do %>
+				<%= render 'features_loop', feature: f %>
+			<% end %>
+		<% end %>
 
 
 	</div>
 </div>
+

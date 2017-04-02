@@ -4,7 +4,7 @@
 			<span class="glyphicon glyphicon-remove"></span>
 			Cancel
 		<% end %>
-		<% url_path = feature.new_record? ? product_features_path(@product) : feature_path(feature) %>
+		<% url_path = feature.new_record? ? project_features_path(@project) : feature_path(feature) %>
 		<%= simple_form_for(feature, url: url_path) do |f| %>
 		  <%= f.error_notification %>
 

@@ -1,23 +1,37 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+  before_action :set_product, only: [:edit, :update, :destroy]
 
   # GET /products
   # GET /products.json
   def index
-    @products = Product.all
+    if current_user.team.nil?
+      redirect_to new_team_path
+    elsif current_user.active_product.nil?
+      @products = current_user.team.products
+    else
+      redirect_to product_path(current_user.active_product)
+    end
   end
 
   # GET /products/1
   # GET /products/1.json
   def show
-    @completed_features = @product.completed_features
-    @active_features    = @product.active_features
+    if current_user.team.nil?
+      redirect_to new_team_path
+    elsif current_user.active_product.nil?
+      redirect_to products_path
+    elsif current_user.active_project
+      redirect_to project_path(current_user.active_project)
+    else
+      set_product
+      @projects = @product.projects.sorted
+    end
   end
 
   # GET /products/new
   def new
-    @project = Project.find params[:project_id]
-    @product = @project.products.build
+    @product = Product.new
   end
 
   # GET /products/1/edit
@@ -27,15 +41,21 @@ class ProductsController < ApplicationController
   # POST /products
   # POST /products.json
   def create
-    @project = Project.find params[:project_id]
-    @product = @project.products.build(product_params)
+    @product = Product.new(product_params)
+    @product.team = current_user.team
 
     respond_to do |format|
       if @product.save
-        format.html { redirect_to @product, notice: 'Product was successfully created.' }
-        format.json { render :show, status: :created, location: @product }
+        membership = current_user.active_membership
+        if membership.update active_product: @product
+          format.html { redirect_to @product }
+          format.json { render :show, status: :created, location: @product }
+        else
+          format.html { render :new, notice: "Something went wrong. #{error_message_for membership}" }
+          format.json { render json: @product.errors, status: :unprocessable_entity }
+        end
       else
-        format.html { render :new }
+        format.html { render :new, notice: "Something went wrong. #{error_message_for @product}" }
         format.json { render json: @product.errors, status: :unprocessable_entity }
       end
     end
@@ -60,7 +80,7 @@ class ProductsController < ApplicationController
   def destroy
     @product.destroy
     respond_to do |format|
-      format.html { redirect_to projects_url(@product.project), notice: 'Product was successfully destroyed.' }
+      format.html { redirect_to products_url, notice: 'Product was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

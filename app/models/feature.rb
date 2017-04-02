@@ -1,8 +1,8 @@
 class Feature < ActiveRecord::Base
-  belongs_to :product
-  acts_as_list scope: :product
+  belongs_to :project
+  acts_as_list scope: :project
 
-  validates_presence_of :name, :product_id
+  validates_presence_of :name, :project_id
 
   before_save :update_completed_date
 

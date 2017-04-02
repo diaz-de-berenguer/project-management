@@ -4,8 +4,8 @@
 		<% @completed_features.each do |hash| %>
 			<div style="padding-bottom:3em">
 				<h3>
-					<small>Project:</small><br>
-					<%= hash[:project].name %>
+					<small>Product:</small><br>
+					<%= hash[:product].name %>
 				</h3>
 
 				<% hash[:features].each do |feature| %>
@@ -17,8 +17,8 @@
 						<div class="col-md-9 col-xs-8">
 							<strong><%= feature.name %></strong><br>
 							<small>
-								Product:
-								<%= feature.product.name %>
+								Project:
+								<%= feature.project.name %>
 							</small>
 						</div>
 					</div>
@@ -28,8 +28,8 @@
 		<% end if false %>
 
 		<h3>
-			<small>Project:</small><br>
-			<%= current_user.active_project.name %>
+			<small>Product:</small><br>
+			<%= current_user.active_product.name %>
 		</h3>
 
 		<% @completed_features.each do |feature| %>
@@ -43,8 +43,8 @@
 				<div class="col-md-9 col-xs-8">
 					<strong><%= feature.name %></strong><br>
 					<small>
-						Product:
-						<%= link_to feature.product.name, active_product_path(feature.product) %>
+						Project:
+						<%= link_to feature.project.name, active_project_path(feature.project) %>
 					</small>
 				</div>
 			</div>

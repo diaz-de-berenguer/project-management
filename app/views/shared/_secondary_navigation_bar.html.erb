@@ -1,17 +1,17 @@
 <nav class="navbar navbar-default navbar-fixed-top" style="padding-top:50px;background-color:#fff;">
   <div class="container-fluid" style="padding: 0 5em">
     <h3 class='pull-left'>
-      <%= link_to current_user.active_project.name, product_all_path, method: :delete %>
+      <%= link_to current_user.active_product.name, project_all_path, method: :delete %>
     </h3>
 
-    <%= link_to project_all_path, method: :delete, class: "tooltipper pull-left", data:
-        { toggle: "tooltip", placement: "bottom" }, title: "Other Projects" do %>
+    <%= link_to product_all_path, method: :delete, class: "tooltipper pull-left", data:
+        { toggle: "tooltip", placement: "bottom" }, title: "Other Products" do %>
         <h4 style="margin:0.5em" ><i class="fa fa-times-circle-o"></i></h4>
     <% end %>
 
     <div class="pull-right">
-      <%= link_to edit_project_path(current_user.active_project), class: "tooltipper pull-left", data:
-          { toggle: "tooltip", placement: "bottom" }, title: "Edit Project" do %>
+      <%= link_to edit_product_path(current_user.active_product), class: "tooltipper pull-left", data:
+          { toggle: "tooltip", placement: "bottom" }, title: "Edit Product" do %>
         <h3><small>
         	<span class="fa-stack" style="margin: 0 2em;">
         	  <i class="fa fa-circle fa-stack-2x"></i>
@@ -32,10 +32,10 @@
       <% end %>
 
 
-      <%# link_to project_all_path, method: :delete, class: "tooltipper pull-left", data:
-          { toggle: "tooltip", placement: "bottom" }, title: "Other Projects" do %>
+      <%# link_to product_all_path, method: :delete, class: "tooltipper pull-left", data:
+          { toggle: "tooltip", placement: "bottom" }, title: "Other Products" do %>
 
-      <%= link_to project_features_path(current_user.active_project), class: "tooltipper pull-left", data:
+      <%= link_to product_features_path(current_user.active_product), class: "tooltipper pull-left", data:
           { toggle: "tooltip", placement: "bottom" }, title: "All Features" do %>
         <h3><small>
         	<span class="fa-stack" style="margin: 0 2em;">

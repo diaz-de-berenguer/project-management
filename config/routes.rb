@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   # root 'start#home'
-  root 'projects#index'
+  root 'products#index'
 
   devise_for :users, controllers: {
     confirmations:      'users/confirmations',
@@ -16,20 +16,20 @@ Rails.application.routes.draw do
   end
   post "/teams/switch/:id" => 'teams#switch', as: 'team_switch'
 
-  resources :projects, shallow: true do
-    resources :products, except: :index do
+  resources :products, shallow: true do
+    resources :projects, except: :index do
       resources :features, except: :index
     end
     resources :features, only: :index
   end
 
-  post   '/project/:id' => 'active_projects#create', as: 'active_project'
-  get    '/project/:id' => 'active_projects#show',   as: 'alt_project'
-  delete '/project/all' => 'active_projects#destroy'
-
   post   '/product/:id' => 'active_products#create', as: 'active_product'
   get    '/product/:id' => 'active_products#show',   as: 'alt_product'
   delete '/product/all' => 'active_products#destroy'
+
+  post   '/project/:id' => 'active_projects#create', as: 'active_project'
+  get    '/project/:id' => 'active_projects#show',   as: 'alt_project'
+  delete '/project/all' => 'active_projects#destroy'
 
   get '/complete' => 'completed_features#index'
 
@@ -40,16 +40,16 @@ Rails.application.routes.draw do
   # root 'welcome#index'
 
   # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
+  #   get 'projects/:id' => 'catalog#view'
 
-  # Example of named route that can be invoked with purchase_url(id: product.id)
-  #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
+  # Example of named route that can be invoked with purchase_url(id: project.id)
+  #   get 'projects/:id/purchase' => 'catalog#purchase', as: :purchase
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
+  #   resources :projects
 
   # Example resource route with options:
-  #   resources :products do
+  #   resources :projects do
   #     member do
   #       get 'short'
   #       post 'toggle'
@@ -61,13 +61,13 @@ Rails.application.routes.draw do
   #   end
 
   # Example resource route with sub-resources:
-  #   resources :products do
+  #   resources :projects do
   #     resources :comments, :sales
   #     resource :seller
   #   end
 
   # Example resource route with more complex sub-resources:
-  #   resources :products do
+  #   resources :projects do
   #     resources :comments
   #     resources :sales do
   #       get 'recent', on: :collection
@@ -83,8 +83,8 @@ Rails.application.routes.draw do
 
   # Example resource route within a namespace:
   #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
+  #     # Directs /admin/projects/* to Admin::projectsController
+  #     # (app/controllers/admin/projects_controller.rb)
+  #     resources :projects
   #   end
 end

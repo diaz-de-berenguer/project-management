@@ -2,8 +2,8 @@
   <div class="col-md-8 col-md-offset-2">
 
     <h3>
-      <small>Project:</small><br>
-      <%= current_user.active_project.name %>
+      <small>Product:</small><br>
+      <%= current_user.active_product.name %>
     </h3>
 
     <% @features.each do |feature| %>
@@ -17,8 +17,8 @@
         <div class="col-md-9 col-xs-8">
           <strong><%= feature.name %></strong><br>
           <small>
-            Product:
-            <%= link_to feature.product.name, active_product_path(feature.product) %>
+            Project:
+            <%= link_to feature.project.name, active_project_path(feature.project) %>
           </small>
         </div>
       </div>

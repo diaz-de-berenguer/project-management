@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170209175922) do
+ActiveRecord::Schema.define(version: 20170402214300) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,25 +33,15 @@ ActiveRecord::Schema.define(version: 20170209175922) do
     t.text     "description",    default: ""
     t.boolean  "scheduled",      default: false
     t.boolean  "completed",      default: false
-    t.integer  "product_id"
+    t.integer  "project_id"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
     t.datetime "completed_date"
   end
 
-  add_index "features", ["product_id"], name: "index_features_on_product_id", using: :btree
+  add_index "features", ["project_id"], name: "index_features_on_project_id", using: :btree
 
   create_table "products", force: :cascade do |t|
-    t.string   "name"
-    t.text     "description"
-    t.integer  "project_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  add_index "products", ["project_id"], name: "index_products_on_project_id", using: :btree
-
-  create_table "projects", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
     t.integer  "team_id"
@@ -59,15 +49,25 @@ ActiveRecord::Schema.define(version: 20170209175922) do
     t.datetime "updated_at",  null: false
   end
 
-  add_index "projects", ["team_id"], name: "index_projects_on_team_id", using: :btree
+  add_index "products", ["team_id"], name: "index_products_on_team_id", using: :btree
+
+  create_table "projects", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "product_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "projects", ["product_id"], name: "index_projects_on_product_id", using: :btree
 
   create_table "team_memberships", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "team_id"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
-    t.integer  "active_project_id"
     t.integer  "active_product_id"
+    t.integer  "active_project_id"
   end
 
   add_index "team_memberships", ["active_product_id"], name: "index_team_memberships_on_active_product_id", using: :btree
@@ -102,9 +102,9 @@ ActiveRecord::Schema.define(version: 20170209175922) do
   add_index "users", ["team_id"], name: "index_users_on_team_id", using: :btree
 
   add_foreign_key "beta_user_invites", "users"
-  add_foreign_key "features", "products"
-  add_foreign_key "products", "projects"
-  add_foreign_key "projects", "teams"
+  add_foreign_key "features", "projects"
+  add_foreign_key "products", "teams"
+  add_foreign_key "projects", "products"
   add_foreign_key "team_memberships", "products", column: "active_product_id"
   add_foreign_key "team_memberships", "projects", column: "active_project_id"
   add_foreign_key "team_memberships", "teams"

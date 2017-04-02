@@ -14,12 +14,12 @@ class User < ActiveRecord::Base
 
 	validate :team_id_must_have_memberhsip
 
-	def active_project
-		self.active_membership ? self.active_membership.active_project : nil
-	end
-
 	def active_product
 		self.active_membership ? self.active_membership.active_product : nil
+	end
+
+	def active_project
+		self.active_membership ? self.active_membership.active_project : nil
 	end
 
 	def active_membership

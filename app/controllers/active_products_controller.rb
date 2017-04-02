@@ -2,11 +2,7 @@ class ActiveProductsController < ApplicationController
 	before_action :authenticate_user!
 
 	def show
-		if params[:id] == 'all'
-			redirect_to products_path
-		else
-			redirect_to product_path
-		end
+		redirect_to product_path
 	end
 
 	def create
@@ -20,7 +16,7 @@ class ActiveProductsController < ApplicationController
 	end
 
 	def destroy
-		if current_user.active_membership.update(active_product_id: nil)
+		if current_user.active_membership.update(active_product_id: nil, active_project_id: nil)
 			redirect_to root_path
 		else
 			flash[:notice] = "Something went wrong!"
