@@ -3,9 +3,11 @@ class FeaturesController < ApplicationController
 
   # # GET /features
   # # GET /features.json
-  # def index
-  #   @features = Feature.all
-  # end
+  def index
+    # @project  = Project.find(params[:project_id])
+    @project  = current_user.active_project
+    @features = @project.products.map(&:features).flatten.sort_by(&:created_at).reverse
+  end
 
   # GET /features/1
   # GET /features/1.json

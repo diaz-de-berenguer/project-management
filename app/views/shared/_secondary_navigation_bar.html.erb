@@ -4,6 +4,11 @@
       <%= link_to current_user.active_project.name, product_all_path, method: :delete %>
     </h3>
 
+    <%= link_to project_all_path, method: :delete, class: "tooltipper pull-left", data:
+        { toggle: "tooltip", placement: "bottom" }, title: "Other Projects" do %>
+        <h4 style="margin:0.5em" ><i class="fa fa-times-circle-o"></i></h4>
+    <% end %>
+
     <div class="pull-right">
       <%= link_to edit_project_path(current_user.active_project), class: "tooltipper pull-left", data:
           { toggle: "tooltip", placement: "bottom" }, title: "Edit Project" do %>
@@ -27,8 +32,11 @@
       <% end %>
 
 
-      <%= link_to project_all_path, method: :delete, class: "tooltipper pull-left", data:
+      <%# link_to project_all_path, method: :delete, class: "tooltipper pull-left", data:
           { toggle: "tooltip", placement: "bottom" }, title: "Other Projects" do %>
+
+      <%= link_to project_features_path(current_user.active_project), class: "tooltipper pull-left", data:
+          { toggle: "tooltip", placement: "bottom" }, title: "All Features" do %>
         <h3><small>
         	<span class="fa-stack" style="margin: 0 2em;">
         	  <i class="fa fa-circle fa-stack-2x" class="tooltipper"></i>

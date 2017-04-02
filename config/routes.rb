@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     resources :products, except: :index do
       resources :features, except: :index
     end
+    resources :features, only: :index
   end
 
   post   '/project/:id' => 'active_projects#create', as: 'active_project'
