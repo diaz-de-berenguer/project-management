@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
 
 	before_create :check_against_beta_invites
 
+	validate :team_id_must_have_memberhsip
+
 	def active_project
 		self.active_membership ? self.active_membership.active_project : nil
 	end
@@ -33,6 +35,12 @@ class User < ActiveRecord::Base
 				return false
 			else
 				invite.update(redeemed: true)
+			end
+		end
+
+		def team_id_must_have_memberhsip
+			unless self.team_memberships.map(&:team_id).include? self.team_id
+				self.errors.add :team, "must have a membership"
 			end
 		end
 end
